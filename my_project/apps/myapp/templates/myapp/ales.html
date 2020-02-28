@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<style>
+    li{
+        color: black;
+    }
+    #box{
+        display: inline-block;
+        margin: 5px;
+        height: 250px;
+        width: 300px;
+        vertical-align: top;
+    }
+</style>
+<body>
+
+    <h1>All of our Ales</h1>
+    <a href="/">Home</a>
+    <a href="/thelogin">Dashboard</a><br>
+
+    <p>{% for ales in all_ales %}</p>
+    <p>{{ales.name}}</p>
+    <p>{{ales.category}}</p>
+    {{ales.abv}}%
+    {{ales.ibu}}%
+    <img src="{% static "myapp/images/ale.png" %}" width="200px" height="200px" alt="Ale" >
+    
+    {% endfor %}
+
+
+    <ul>
+        {% for ales in all_ales %}
+
+        <li>{{ales.name}}</li>
+        <li>{{ales.category}}</li>
+        <li>{{ales.abv}}%</li>
+        <li>{{ales.ibu}}%</li>
+        <li>{{ales.brewery}}</li>
+        <li>{{ales.rating}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

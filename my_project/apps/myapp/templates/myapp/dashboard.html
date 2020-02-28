@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <title>Document</title>
+    <style>
+       
+        .logout a{
+            margin-top: -156px;
+            display:inline-block;
+            margin-left:90%;
+        }
+        .add a{
+            
+            display:inline-block;
+            margin-top:-70px;
+            margin-left:85%
+        }
+       .header h3{
+           display: inline-block;
+           margin-top:-43px;
+           vertical-align: top;
+           margin-left:10px;
+       }
+       .image{
+         display:inline-block;
+       }
+       html, body {
+  margin: 0; padding: 0;
+}
+.errors{
+  color:red;
+}
+.hero-bkg-animated {
+  background: gray url(https://subtlepatterns.com/patterns/geometry2.png) repeat 0 0;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  height: auto;
+  padding-top: 120px;
+  box-sizing: border-box;
+  -webkit-animation: slide 20s linear infinite;
+}
+
+.hero-bkg-animated h1 {
+  font-family: sans-serif;
+}
+
+@-webkit-keyframes slide {
+    from { background-position: 0 0; }
+    to { background-position: -400px 0; }
+}
+       
+    </style>
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div class='errors'>
+        {% if messages %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+    </div>
+  <div class="hero-bkg-animated">
+    <div class='image'>
+        <a class="navbar-brand" href="/"><img src="{% static "myapp/images/brewscovery_logo.png" %}"/ width="100px" height="100px"></a>
+    </div>
+    
+        <div class='logout'>
+            <a class="btn btn-primary" href='/logout'>Log Out</a>
+        </div>
+
+        <div class='add'>
+            <a class='btn btn-primary' href='/add'>Add Your Own Brew</a>
+        </div>
+        <div class='header'>
+            <h3>Welcome, {{myuserfirstname}}</h3>
+        </div>
+      
+    <hr>
+
+    <h3>Your Favorite Beers: </h3>
+    <form action='/searching2' method='POST'>
+      {% csrf_token %}
+    <!-- <form action='/searching'> -->
+    <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Brewery</th>
+                <th scope="col">Type</th>
+                <th scope="col">ABV %</th>
+                <th scope="col">IBU</th>
+                <th scope='col'>Rating</th>
+                <th scope='col'>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+          
+              {% for beer in all_beers %}
+               
+                
+              
+                <th scope="row">{{beer.name}}</th>
+                <td><button type='submit' name='beernamez' value='{{beer.brewery}}' class="btn btn-outline-primary">{{beer.brewery}}</button></td>
+                <td>{{beer.category}}</td>
+                <td>{{beer.abv}}</td>
+                <td>{{beer.ibu}}</td>
+                <td>{{beer.rating}}</td>
+                <td><a class="btn btn-outline-primary" href="/remove/{{beer.id}}">Remove</a> 
+                </td>
+              </tr>
+            
+              {% endfor %}
+            </tbody>
+          </table>
+          </form>
+        </div>
+  
+        
+    
+</body>
+</html>
